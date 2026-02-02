@@ -57,6 +57,15 @@ Find the routes involving two buses that can go from Craiglockhart to Lochend.
 Show the bus no. and company for the first bus, the name of the stop for the transfer,
 and the bus no. and company for the second bus.
 */
+SELECT bus1.num, bus1.company,bus1.name, bus2.num, bus2.company
+FROM (SELECT DISTINCT r1.num, r1.company, b.name FROM route r1 JOIN route r2 ON (r1.company=r2.company AND r1.num=r2.num)
+JOIN stops a ON a.id=r1.stop AND a.name='Craiglockhart' JOIN stops b ON b.id=r2.stop) AS bus1
+JOIN (SELECT DISTINCT r1.num, r1.company, a.name 
+FROM route r1 JOIN route r2 ON (r1.company=r2.company AND r1.num=r2.num)
+JOIN stops a ON a.id=r1.stop 
+JOIN stops b ON b.id=r2.stop AND b.name='Lochend') AS bus2
+ON bus1.name=bus2.name
+ORDER BY bus1.num, bus1.company, bus1.name, bus2.num, bus2.company
 
 
 
