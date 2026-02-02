@@ -35,3 +35,23 @@ FROM actor
 JOIN casting ON actor.id=actorid
 JOIN movie ON movie.id=movieid
 WHERE ord=1 AND movieid IN (SELECT movieid FROM casting JOIN actor ON actorid=actor.id WHERE actor.name='Julie Andrews')
+
+
+/*
+Obtain a list, in alphabetical order, of actors who've had at least 15 starring roles.
+*/
+SELECT DISTINCT actor.name FROM actor
+JOIN casting ON actor.id=actorid
+WHERE ord=1 
+GROUP BY actor.name
+HAVING COUNT(actor.name)>=15
+ORDER BY actor.name ASC
+
+
+/*
+List all the people who have worked with 'Art Garfunkel'.
+*/
+SELECT DISTINCT actor.name FROM actor
+JOIN casting ON actor.id=actorid
+WHERE movieid IN (SELECT movieid FROM casting JOIN actor ON actor.id=actorid WHERE name='Art Garfunkel') AND name !='Art Garfunkel'
+
