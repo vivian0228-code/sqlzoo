@@ -25,3 +25,13 @@ SELECT mdate,
     game LEFT JOIN goal ON (id = matchid)
     GROUP BY mdate,team1,team2
     ORDER BY mdate, matchid, team1, team2
+
+
+/*
+List the film title and the leading actor for all of the films 'Julie Andrews' played in.
+*/
+SELECT title, actor.name AS leading_actor
+FROM actor 
+JOIN casting ON actor.id=actorid
+JOIN movie ON movie.id=movieid
+WHERE ord=1 AND movieid IN (SELECT movieid FROM casting JOIN actor ON actorid=actor.id WHERE actor.name='Julie Andrews')
