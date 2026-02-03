@@ -29,3 +29,11 @@ The first and last cats are content to have an average weight of consisting of 2
 select name, weight, AVG(WEIGHT) OVER (ORDER BY weight ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING) AS avearge_weight
  from cats 
 
+
+
+/*
+The cats must be ordered by weight descending and will enter an elevator one by one. We would like to know what the running total weight is.
+If two cats have the same weight they must enter separately SHOULD USE ROWS BETWEEN
+*/
+select name, SUM(weight) OVER(ORDER BY weight desc ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
+ from cats 
