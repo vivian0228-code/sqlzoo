@@ -34,6 +34,7 @@ select name, weight, AVG(WEIGHT) OVER (ORDER BY weight ROWS BETWEEN 1 PRECEDING 
 /*
 The cats must be ordered by weight descending and will enter an elevator one by one. We would like to know what the running total weight is.
 If two cats have the same weight they must enter separately SHOULD USE ROWS BETWEEN
+ https://www.windowfunctions.com/questions/over/3
 */
 select name, SUM(weight) OVER(ORDER BY weight desc ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
  from cats 
