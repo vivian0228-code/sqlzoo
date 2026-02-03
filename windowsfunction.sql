@@ -15,6 +15,7 @@ SUM(Salary) OVER ()
 
 
 /*The cats must be ordered first by breed and second by name. They are about to enter an elevator one by one. When all the cats of the same breed have entered they leave.
+https://www.windowfunctions.com/questions/over/1
 */
 select name, breed, SUM(weight) OVER(PARTITION BY breed ORDER BY name) from cats 
 
@@ -23,6 +24,8 @@ select name, breed, SUM(weight) OVER(PARTITION BY breed ORDER BY name) from cats
 /*
 The cats would like to see the average of the weight of them, the cat just after them and the cat just before them.
 The first and last cats are content to have an average weight of consisting of 2 cats not 3.
+ https://www.windowfunctions.com/questions/over/2
 */
 select name, weight, AVG(WEIGHT) OVER (ORDER BY weight ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING) AS avearge_weight
  from cats 
+
