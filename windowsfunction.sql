@@ -38,3 +38,14 @@ If two cats have the same weight they must enter separately SHOULD USE ROWS BETW
 */
 select name, SUM(weight) OVER(ORDER BY weight desc ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
  from cats 
+
+
+
+/*
+We would like to find the fattest cat. Order all our cats by weight.
+
+The two heaviest cats should both be 1st. The next heaviest should be 3rd.
+*/
+select RANK()OVER(ORDER BY weight desc), weight, name
+ from cats 
+ORDER BY rank, name
